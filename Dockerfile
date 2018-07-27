@@ -19,17 +19,18 @@ RUN apt-get update && \
     git-core \
     zip \
     openssh-server && \
-    nmap && \
-    apt-get purge -y --auto-remove && \ 
+    apt-get purge -y --auto-remove && \
+    apt update && \
+    apt install nmap -y && \
     rm -rf /var/lib/apt/lists/* && \
 #   Install SSHD KEY
-    /usr/bin/ssh-keygen -A && ser\
+    /usr/bin/ssh-keygen -A && \
 #  3. Install Composer
     curl -sS https://getcomposer.org/installer | php -- --filename=composer --install-dir=/usr/local/bin && \ 
     chown -R jenkins:jenkins /var/jenkins_home/
+ENTRYPOINT service ssh restart && bash
 USER jenkins
 WORKDIR /var/jenkins_home/
-ENTRYPOINT service ssh restart && bash
 
 ## Docker image name:                           jenkins-master
 ## Docker Hub Image Name:                       devtutspace/jenkins-master
