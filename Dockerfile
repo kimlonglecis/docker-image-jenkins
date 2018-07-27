@@ -21,6 +21,8 @@ RUN apt-get update && \
     openssh-server && \
     apt-get purge -y --auto-remove && \ 
     rm -rf /var/lib/apt/lists/* && \
+#   Install SSHD KEY
+    /usr/bin/ssh-keygen -A && \
 #  3. Install Composer
     curl -sS https://getcomposer.org/installer | php -- --filename=composer --install-dir=/usr/local/bin && \ 
     chown -R jenkins:jenkins /var/jenkins_home/
